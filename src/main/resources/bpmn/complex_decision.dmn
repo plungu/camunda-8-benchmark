@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1sxd9kj" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.0.0">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1sxd9kj" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.26.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.0.0">
   <decision id="benchmark-decision" name="Benchmark Decision">
     <decisionTable id="DecisionTable_1nk40bx">
       <input id="Input_1" label="List Item">
@@ -7,85 +7,217 @@
           <text>listItem</text>
         </inputExpression>
       </input>
+      <input id="InputClause_0i0sh8d">
+        <inputExpression id="LiteralExpression_15yhfzr" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1d6e7jg">
+        <inputExpression id="LiteralExpression_0ktd0ev" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
       <output id="Output_1" label="Do I like this character?" typeRef="string" />
+      <output id="OutputClause_01udfds" typeRef="string" />
+      <output id="OutputClause_08ak18p" typeRef="string" />
       <rule id="DecisionRule_1fbcxga">
         <inputEntry id="UnaryTests_0s110t8">
           <text>"a"</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_1pehabx">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03fsguw">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_01kppyb">
           <text>"yes"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1a0qlo3">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0hzx1cz">
+          <text></text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1jzfge3">
         <inputEntry id="UnaryTests_0qs6azr">
           <text>"b"</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_1dkr4lb">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_130wvbi">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_0e73o9n">
           <text>"of course"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0xkm4a6">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1kt9ir2">
+          <text></text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1blpajz">
         <inputEntry id="UnaryTests_05j2rg1">
           <text>"c"</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_109vdt3">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0181t6h">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_0dqnuh1">
           <text>"hey - Camunda starts with a c :-) "</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_109xhfm">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1kpomzz">
+          <text></text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1nqbalk">
         <inputEntry id="UnaryTests_0tg2d3q">
           <text>"d"</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_1gmhg7o">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_047eb58">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_0xx4zx2">
           <text>"kind of"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1g61pnv">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1vzbhtp">
+          <text></text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1qm8x5g">
         <inputEntry id="UnaryTests_0s3ptrl">
           <text>"e"</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0cd5v0r">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0m338v2">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_1le8v7o">
           <text>"nice and round"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1085wj1">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ho7s0q">
+          <text></text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1wg3wd4">
         <inputEntry id="UnaryTests_075tobe">
           <text>"f"</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0fhkwlo">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0rimro2">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_1kxrz2g">
           <text>"what shall I say"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_09xxhdf">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0sigs9e">
+          <text></text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0w8bl2f">
         <inputEntry id="UnaryTests_087rktt">
           <text>"g"</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_07fnfm4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_15kkt85">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_10cuynv">
           <text>"not sure"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_06hol8c">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0z8nf49">
+          <text></text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1o48nk1">
         <inputEntry id="UnaryTests_0jrsfaf">
           <text>"h"</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_1vjayul">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0unlqyd">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_17f37wm">
           <text>"love it"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_07sbpje">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_11jpy1g">
+          <text></text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0dq2c22">
         <inputEntry id="UnaryTests_0f97vq2">
           <text>"i"</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0r3znan">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jfzd3a">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_1connk8">
           <text>"the best counter variable ever"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1d3elk1">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0bnbx8u">
+          <text></text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0p1t4rh">
         <inputEntry id="UnaryTests_1plaezg">
           <text>"j"</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_16qfjjl">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ujzo01">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_18kd8jv">
           <text>"also great if you need a  nested for each loop"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0oujm89">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_089r2q4">
+          <text></text>
         </outputEntry>
       </rule>
     </decisionTable>
