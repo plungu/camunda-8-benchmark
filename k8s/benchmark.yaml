@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: camunda-8-benchmark
-  replicas: 5
+  replicas: 4
   template:
     metadata:
       labels:
@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: camunda-8-benchmark
-          image: gcr.io/paul-rnd/paul-camunda-8-benchmark:0.0.1-SNAPSHOT
+          image: us-central1-docker.pkg.dev/paul-rnd/paul-benchmark-repo/paul-camunda-8-benchmark:0.0.2-SNAPSHOT
           imagePullPolicy: Always
           env:
             - name: JAVA_OPTIONS
@@ -34,29 +34,28 @@ spec:
                 -Dzeebe.client.worker.max-jobs-active=2000
                 -Dzeebe.client.worker.threads=500
                 -Dzeebe.client.default-job-worker-stream-enabled=true
-                -Dbenchmark.startPiPerSecond=50
-                -Dbenchmark.taskCompletionDelay=10
+                -Dbenchmark.startPiPerSecond=300
+                -Dbenchmark.taskCompletionDelay=100
                 -Dbenchmark.multipleJobTypes=0
                 -Denchmark.warmupPhaseDurationMillis=6000
                 -Dbenchmark.startRateAdjustmentStrategy=backpressure
-                -Dbenchmark.maxBackpressurePercentage=10.0
+                -Dbenchmark.maxBackpressurePercentage=30.0
                 -Dbenchmark.startPiReduceFactor=0.1
-                -Dbenchmark.startPiIncreaseFactor=0.5
+                -Dbenchmark.startPiIncreaseFactor=0
                 -Dbenchmark.fixedBackOffDelay=0
-                -Dbenchmark.bpmnProcessId=benchmark
+                -Dbenchmark.bpmnProcessId=PerformanceWorkflow
                 -Dbenchmark.startProcesses=true         
                 -Dbenchmark.startWorkers=true
                 -Dbenchmark.jobType=benchmark-task
                 -Dbenchmark.payloadPath=classpath:bpmn/typical_payload.json
-                -Dbenchmark.autoDeployProcess=false
-                -Dbenchmark.bpmnResource=classpath:bpmn/complex_decision.dmn
-                -Dbenchmark.bpmnResource=classpath:bpmn/simple_dmn_process.bpmn
+                -Dbenchmark.autoDeployProcess=true
+                -Dbenchmark.bpmnResource=classpath:bpmn/PerformanceWorkflow.bpmn
           resources:
             limits:
-              cpu: 8
-              memory: 20Gi
+              cpu: 5
+              memory: 10Gi
             requests:
-              cpu: 8
+              cpu: 5
               memory: 10Gi
 ---
 apiVersion: v1

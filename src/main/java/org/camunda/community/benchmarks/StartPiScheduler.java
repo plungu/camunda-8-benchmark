@@ -190,6 +190,7 @@ public class StartPiScheduler {
         if (stats.getBackpressureOnStartPiMeter().getOneMinuteRate() < 1) {
             // increase it by bigger junk (10% of goal)
             long rate = Math.round(Math.ceil(config.getStartPiPerSecond()/10));
+            if (config.getStartPiIncreaseFactor() == 0) { rate = 0; }
             LOG.info("Backpressure dropped, increasing start rate by " + rate );
             adjustStartRateBy( rate );
         }  else {
@@ -197,12 +198,14 @@ public class StartPiScheduler {
             if (backpressurePercentage > config.getMaxBackpressurePercentage()) {
                 // Backpressure too high - reduce start rate
                 long rate = Math.round( (config.getMaxBackpressurePercentage() - backpressurePercentage)/100 * piStartedGoal * config.getStartPiReduceFactor());
+                if (config.getStartPiIncreaseFactor() == 0) { rate = 0; }
                 LOG.info("Backpressure percentage too high ("+backpressurePercentage+" > "+config.getMaxBackpressurePercentage()+"), reducing start rate by " + rate );
                 adjustStartRateBy(rate);
             } else{
                 // Backpressure is there, but lower than the maximum considered optimal for throughput
                 // slightly increase start rate
                 long rate = Math.round( (config.getMaxBackpressurePercentage() - backpressurePercentage)/100 * piStartedGoal * config.getStartPiIncreaseFactor());
+                if (config.getStartPiIncreaseFactor() == 0) { rate = 0; }
                 LOG.info("Backpressure percentage too low ("+backpressurePercentage+" <= "+config.getMaxBackpressurePercentage()+"), increasing start rate by " + rate );
                 adjustStartRateBy(rate);
             }
