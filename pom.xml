@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.camunda.community</groupId>
     <artifactId>community-hub-release-parent</artifactId>
-    <version>1.4.1</version>
+    <version>1.4.4</version>
     <relativePath />
   </parent>
 
@@ -33,10 +33,16 @@
       <version>31.1-jre</version>
     </dependency>
 
+<!--    <dependency>-->
+<!--      <groupId>io.camunda.spring</groupId>-->
+<!--      <artifactId>spring-boot-starter-camunda</artifactId>-->
+<!--      <version>8.4.0</version>-->
+<!--    </dependency>-->
+
     <dependency>
-      <groupId>io.camunda.spring</groupId>
-      <artifactId>spring-boot-starter-camunda</artifactId>
-      <version>8.4.0</version>
+      <groupId>io.camunda</groupId>
+      <artifactId>spring-boot-starter-camunda-sdk</artifactId>
+      <version>8.7.1</version>
     </dependency>
 
     <dependency>
@@ -60,7 +66,7 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
-      <version>3.2.2</version>
+      <version>3.3.2</version>
     </dependency>
     <dependency>
       <groupId>io.micrometer</groupId>
@@ -70,7 +76,7 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-webflux</artifactId>
-      <version>3.2.2</version>
+      <version>3.3.1</version>
     </dependency>
 	<dependency>
 	    <groupId>commons-lang</groupId>
@@ -95,7 +101,31 @@
       <artifactId>junit-jupiter</artifactId>
       <version>5.9.3</version>
       <scope>test</scope>
-    </dependency>    
+    </dependency>
+
+    <!-- JMeter’s Java Sampler API (where AbstractJavaSamplerClient lives) -->
+    <dependency>
+      <groupId>org.apache.jmeter</groupId>
+      <artifactId>ApacheJMeter_java</artifactId>
+      <version>5.5</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- JMeter Core engine and test elements -->
+    <dependency>
+      <groupId>org.apache.jmeter</groupId>
+      <artifactId>ApacheJMeter_core</artifactId>
+      <version>5.5</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Jorphan: JMeter’s common utilities -->
+    <dependency>
+      <groupId>org.apache.jmeter</groupId>
+      <artifactId>jorphan</artifactId>
+      <version>5.5</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -124,6 +154,70 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <compilerArgs>
+            <arg>-parameters</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+
+      <!-- 1) JMeter Maven Plugin -->
+      <plugin>
+        <groupId>com.lazerycode.jmeter</groupId>
+        <artifactId>jmeter-maven-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+          <execution>
+            <id>jmeter-load</id>
+            <goals>
+              <goal>jmeter</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <!-- point at your JMeter test plans -->
+          <testFilesDirectory>${basedir}/src/test/jmeter</testFilesDirectory>
+          <testFilesIncluded>
+            <jMeterTestFile>camunda-load.jmx</jMeterTestFile>
+          </testFilesIncluded>
+
+          <!-- download & use JMeter 5.5 -->
+          <jmeterVersion>5.5</jmeterVersion>
+
+          <!-- include the gRPC plugin so JMeter can speak Zeebe’s gRPC API -->
+          <jmeterExtensions>
+            <artifact>com.github.zalopay-oss:jmeter-grpc-plugin:1.3</artifact>
+          </jmeterExtensions>
+
+          <!-- pass host/port/processId/payload via Maven properties or env vars -->
+          <propertiesUser>
+            <gatewayHost>${env.ZEEBE_GATEWAY_HOST}</gatewayHost>
+            <gatewayPort>${env.ZEEBE_GATEWAY_PORT}</gatewayPort>
+            <bpmnProcessId>benchmark-process</bpmnProcessId>
+            <payload>{"foo":"bar"}</payload>
+          </propertiesUser>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
+
+  <!-- optional: a profile to isolate performance runs -->
+  <profiles>
+  <profile>
+    <id>performance</id>
+    <activation>
+      <property>
+        <name>perform</name>
+        <value>true</value>
+      </property>
+    </activation>
+    <!-- config above will only run when you invoke:
+         mvn verify -Pperformance -Dperform=true  -->
+  </profile>
+  </profiles>
+
 </project>

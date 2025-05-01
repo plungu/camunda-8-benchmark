@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: camunda-8-benchmark
-  replicas: 4
+  replicas: 1
   template:
     metadata:
       labels:
@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: camunda-8-benchmark
-          image: us-central1-docker.pkg.dev/paul-rnd/paul-benchmark-repo/paul-camunda-8-benchmark:0.0.2-SNAPSHOT
+          image: us-central1-docker.pkg.dev/paul-rnd/paul-benchmark-repo/paul-camunda-8-benchmark:0.0.4-SNAPSHOT
           imagePullPolicy: Always
           env:
             - name: JAVA_OPTIONS
@@ -34,7 +34,7 @@ spec:
                 -Dzeebe.client.worker.max-jobs-active=2000
                 -Dzeebe.client.worker.threads=500
                 -Dzeebe.client.default-job-worker-stream-enabled=true
-                -Dbenchmark.startPiPerSecond=300
+                -Dbenchmark.startPiPerSecond=30
                 -Dbenchmark.taskCompletionDelay=100
                 -Dbenchmark.multipleJobTypes=0
                 -Denchmark.warmupPhaseDurationMillis=6000
@@ -52,11 +52,11 @@ spec:
                 -Dbenchmark.bpmnResource=classpath:bpmn/PerformanceWorkflow.bpmn
           resources:
             limits:
-              cpu: 5
-              memory: 10Gi
+              cpu: 2
+              memory: 5Gi
             requests:
-              cpu: 5
-              memory: 10Gi
+              cpu: 2
+              memory: 5Gi
 ---
 apiVersion: v1
 kind: Service
